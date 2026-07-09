@@ -43,5 +43,9 @@ module SurvivorBackEnd
     config.action_dispatch.rescue_responses.merge!(
       "JWT::DecodeError" => :unauthorized
     )
+
+    config.generators do |g|
+      g.test_framework :rspec, request_specs: true, fixtures: false
+    end
   end
 end
