@@ -40,3 +40,13 @@ plugin :solid_queue if ENV["SOLID_QUEUE_IN_PUMA"]
 # Specify the PID file. Defaults to tmp/pids/server.pid in development.
 # In other environments, only set the PID file if requested.
 pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
+
+# Open the Swagger UI docs in the browser once the dev server is ready.
+if ENV.fetch("RAILS_ENV", "development") == "development"
+  after_booted do
+    Thread.new do
+      sleep 1
+      system("open", "http://localhost:#{ENV.fetch('PORT', 3000)}/api-docs")
+    end
+  end
+end
