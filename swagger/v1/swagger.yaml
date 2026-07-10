@@ -85,6 +85,117 @@ paths:
           description: current user
         '401':
           description: not authenticated
+  "/contestants":
+    get:
+      summary: Retrieves all contestants
+      tags:
+      - Contestants
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: contestants found
+        '401':
+          description: unauthenticated
+    post:
+      summary: Creates a contestant
+      tags:
+      - Contestants
+      security:
+      - bearerAuth: []
+      parameters: []
+      responses:
+        '201':
+          description: contestant created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contestant:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    gender:
+                      type: string
+                    tribename:
+                      type: string
+                  required:
+                  - name
+                  - gender
+  "/contestants/{id}":
+    get:
+      summary: Retrieves a contestant
+      tags:
+      - Contestants
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: contestant found
+        '404':
+          description: contestant not found
+        '401':
+          description: unauthenticated
+    put:
+      summary: Updates a contestant
+      tags:
+      - Contestants
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: contestant updated
+        '404':
+          description: contestant not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contestant:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    gender:
+                      type: string
+                    tribename:
+                      type: string
+    delete:
+      summary: Deletes a contestant
+      tags:
+      - Contestants
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      security:
+      - bearerAuth: []
+      responses:
+        '204':
+          description: contestant deleted
+        '404':
+          description: contestant not found
 components:
   securitySchemes:
     bearerAuth:
