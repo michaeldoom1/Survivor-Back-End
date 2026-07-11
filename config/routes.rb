@@ -19,5 +19,17 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :contestants
+  resources :contestants do
+    collection do
+      get :scores
+    end
+  end
+  resources :picks do
+    collection do
+      get :by_season
+    end
+  end
+  resources :scoring_events
+  resources :episode_scores
+  resources :seasons
 end

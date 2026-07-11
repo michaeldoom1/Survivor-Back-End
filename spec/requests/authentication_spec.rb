@@ -22,6 +22,16 @@ RSpec.describe 'Authentication', type: :request do
       }
 
       response '201', 'user created' do
+        schema type: :object,
+               properties: {
+                 user: {
+                   type: :object,
+                   properties: {
+                     id: { type: :integer },
+                     email: { type: :string }
+                   }
+                 }
+               }
         let(:params) do
           { user: { email: 'friend@example.com', password: 'password123', password_confirmation: 'password123' } }
         end
@@ -29,6 +39,10 @@ RSpec.describe 'Authentication', type: :request do
       end
 
       response '422', 'invalid request' do
+        schema type: :object,
+               properties: {
+                 errors: { type: :array, items: { type: :string } }
+               }
         let(:params) do
           { user: { email: '', password: 'a', password_confirmation: 'b' } }
         end
@@ -57,12 +71,26 @@ RSpec.describe 'Authentication', type: :request do
       }
 
       response '200', 'logged in' do
+        schema type: :object,
+               properties: {
+                 user: {
+                   type: :object,
+                   properties: {
+                     id: { type: :integer },
+                     email: { type: :string }
+                   }
+                 }
+               }
         let!(:existing_user) { User.create!(email: 'friend@example.com', password: 'password123') }
         let(:params) { { user: { email: 'friend@example.com', password: 'password123' } } }
         run_test!
       end
 
       response '401', 'invalid credentials' do
+        schema type: :object,
+               properties: {
+                 error: { type: :string }
+               }
         let(:params) { { user: { email: 'nobody@example.com', password: 'wrong' } } }
         run_test!
       end
@@ -76,6 +104,10 @@ RSpec.describe 'Authentication', type: :request do
       security [ bearerAuth: [] ]
 
       response '200', 'logged out' do
+        schema type: :object,
+               properties: {
+                 message: { type: :string }
+               }
         let!(:existing_user) { User.create!(email: 'friend@example.com', password: 'password123') }
         let(:Authorization) do
           post '/login',
@@ -87,6 +119,10 @@ RSpec.describe 'Authentication', type: :request do
       end
 
       response '401', 'missing token' do
+        schema type: :object,
+               properties: {
+                 error: { type: :string }
+               }
         let(:Authorization) { nil }
         run_test!
       end
@@ -100,6 +136,16 @@ RSpec.describe 'Authentication', type: :request do
       security [ bearerAuth: [] ]
 
       response '200', 'current user' do
+        schema type: :object,
+               properties: {
+                 user: {
+                   type: :object,
+                   properties: {
+                     id: { type: :integer },
+                     email: { type: :string }
+                   }
+                 }
+               }
         let!(:existing_user) { User.create!(email: 'friend@example.com', password: 'password123') }
         let(:Authorization) do
           post '/login',
@@ -111,6 +157,10 @@ RSpec.describe 'Authentication', type: :request do
       end
 
       response '401', 'not authenticated' do
+        schema type: :object,
+               properties: {
+                 error: { type: :string }
+               }
         let(:Authorization) { nil }
         run_test!
       end

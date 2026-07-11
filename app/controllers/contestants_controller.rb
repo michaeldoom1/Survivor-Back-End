@@ -6,6 +6,29 @@ class ContestantsController < ApplicationController
     render json: Contestant.all
   end
 
+  def scores
+    season_id = params.require(:season_id)
+    contestants = Contestant.where(season_id: season_id).includes(episode_scores: :scoring_event)
+
+    render json: contestants.map { |contestant|
+      {
+        id: contestant.id,
+        name: contestant.name,
+        gender: contestant.gender,
+        tribename: contestant.tribename,
+        total_points: contestant.total_points,
+        episode_scores: contestant.episode_scores.sort_by(&:episode_number).map { |episode_score|
+          {
+            id: episode_score.id,
+            episode_number: episode_score.episode_number,
+            scoring_event: episode_score.scoring_event.name,
+            points: episode_score.points
+          }
+        }
+      }
+    }
+  end
+
   def show
     contestant = Contestant.find(params[:id])
     render json: contestant
@@ -44,6 +67,6 @@ class ContestantsController < ApplicationController
   end
 
   def contestant_params
-    params.require(:contestant).permit(:name, :gender, :tribename)
+    params.require(:contestant).permit(:name, :gender, :tribename, :season_id, :occupation, :bio, :age, :photo_url, :video_url)
   end
 end
