@@ -147,7 +147,7 @@ RSpec.describe "Contestants", type: :request do
               bio: { type: :string },
               age: { type: :integer },
               photo_url: { type: :string },
-              video_url: { type: :string },
+              video_url: { type: :string }
             },
             required: %w[name gender season_id]
           }
@@ -316,7 +316,7 @@ RSpec.describe "Contestants", type: :request do
               name: { type: :string },
               gender: { type: :string },
               tribename: { type: :string },
-              season_id: { type: :integer },
+              season_id: { type: :integer }
             }
           }
         }

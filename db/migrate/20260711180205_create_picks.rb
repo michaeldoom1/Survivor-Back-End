@@ -16,6 +16,6 @@ class CreatePicks < ActiveRecord::Migration[8.1]
     add_index :picks, :male_contestant_id
     add_index :picks, :female_contestant_id
     add_index :picks, :golden_goose_contestant_id
-    add_index :picks, [:user_id, :season_number], unique: true
+    add_index :picks, [ :user_id, :season_number ], unique: true
   end
 end

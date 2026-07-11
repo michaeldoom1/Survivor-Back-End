@@ -1,7 +1,7 @@
 class ContestantsController < ApplicationController
   before_action :authenticate_user!
-  before_action :require_admin!, only: [:create, :update, :destroy]
-  
+  before_action :require_admin!, only: [ :create, :update, :destroy ]
+
   def index
     render json: Contestant.all
   end

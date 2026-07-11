@@ -1,6 +1,6 @@
 class PicksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_pick, only: [:show, :update, :destroy]
+  before_action :set_pick, only: [ :show, :update, :destroy ]
 
   def index
     render json: current_user.picks

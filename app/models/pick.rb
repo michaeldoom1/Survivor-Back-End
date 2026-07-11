@@ -30,7 +30,7 @@ class Pick < ApplicationRecord
   end
 
   def contestants_match_season
-    [male_contestant, female_contestant, golden_goose_contestant].compact.each do |contestant|
+    [ male_contestant, female_contestant, golden_goose_contestant ].compact.each do |contestant|
       if contestant.season_id != season_id
         errors.add(:base, "#{contestant.name} is not in season #{season&.number}")
       end

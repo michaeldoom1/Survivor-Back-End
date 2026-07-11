@@ -10,7 +10,7 @@ class CreateEpisodeScores < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :episode_scores, [:contestant_id, :episode_number, :scoring_event_id],
+    add_index :episode_scores, [ :contestant_id, :episode_number, :scoring_event_id ],
               unique: true, name: "index_episode_scores_on_contestant_episode_event"
   end
 end

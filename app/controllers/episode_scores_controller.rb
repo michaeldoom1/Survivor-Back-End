@@ -1,7 +1,7 @@
 class EpisodeScoresController < ApplicationController
   before_action :authenticate_user!
-  before_action :require_admin!, only: [:create, :update, :destroy]
-  before_action :set_episode_score, only: [:show, :update, :destroy]
+  before_action :require_admin!, only: [ :create, :update, :destroy ]
+  before_action :set_episode_score, only: [ :show, :update, :destroy ]
 
   def index
     render json: EpisodeScore.all

@@ -6,7 +6,7 @@ class EpisodeScore < ApplicationRecord
   before_validation :snapshot_points
 
   validates :episode_number, presence: true, numericality: { only_integer: true, greater_than: 0 }
-  validates :scoring_event_id, uniqueness: { scope: [:contestant_id, :episode_number] }
+  validates :scoring_event_id, uniqueness: { scope: [ :contestant_id, :episode_number ] }
 
   validate :contestant_matches_season
 
