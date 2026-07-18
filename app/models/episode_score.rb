@@ -6,6 +6,7 @@ class EpisodeScore < ApplicationRecord
   before_validation :snapshot_points
 
   validates :episode_number, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :count, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :scoring_event_id, uniqueness: { scope: [ :contestant_id, :episode_number ] }
 
   validate :contestant_matches_season
@@ -13,7 +14,7 @@ class EpisodeScore < ApplicationRecord
   private
 
   def snapshot_points
-    self.points = scoring_event.points if scoring_event
+    self.points = scoring_event.points * count if scoring_event
   end
 
   def contestant_matches_season

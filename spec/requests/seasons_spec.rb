@@ -246,7 +246,7 @@ RSpec.describe "Seasons", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 47) }
-        let!(:contestant) { Contestant.create!(name: "Coach", gender: "Male", season: season) }
+        let!(:contestant) { Contestant.create!(person: Person.create!(name: "Coach", gender: "Male"), season: season) }
         let(:id) { season.id }
         run_test!
       end

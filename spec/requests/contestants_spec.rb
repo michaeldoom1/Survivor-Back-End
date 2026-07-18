@@ -85,7 +85,7 @@ RSpec.describe "Contestants", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 47) }
-        let!(:contestant) { Contestant.create!(name: "Coach", gender: "Male", season: season) }
+        let!(:contestant) { Contestant.create!(person: Person.create!(name: "Coach", gender: "Male"), season: season) }
         let!(:scoring_event) { ScoringEvent.create!(name: "Won Individual Immunity", points: 5) }
         let!(:episode_score) do
           EpisodeScore.create!(contestant: contestant, scoring_event: scoring_event, episode_number: 2, season: season)
@@ -267,7 +267,7 @@ RSpec.describe "Contestants", type: :request do
           response.headers['Authorization']
         end
         let!(:season) { Season.create!(number: 47) }
-        let(:id) { Contestant.create(name: "Jane Doe", gender: "Female", tribename: "Tribal", season: season).id }
+        let(:id) { Contestant.create(person: Person.create!(name: "Jane Doe", gender: "Female"), tribename: "Tribal", season: season).id }
         run_test!
       end
 
@@ -294,7 +294,7 @@ RSpec.describe "Contestants", type: :request do
                }
         let(:Authorization) { nil }
         let!(:season) { Season.create!(number: 47) }
-        let(:id) { Contestant.create(name: "Jane Doe", gender: "Female", tribename: "Tribal", season: season).id }
+        let(:id) { Contestant.create(person: Person.create!(name: "Jane Doe", gender: "Female"), tribename: "Tribal", season: season).id }
         run_test!
       end
     end
@@ -339,7 +339,7 @@ RSpec.describe "Contestants", type: :request do
                  updated_at: { type: :string }
                }
         let!(:season) { Season.create!(number: 47) }
-        let(:id) { Contestant.create(name: "Jane Doe", gender: "Female", tribename: "Tribal", season: season).id }
+        let(:id) { Contestant.create(person: Person.create!(name: "Jane Doe", gender: "Female"), tribename: "Tribal", season: season).id }
         let(:params) { { contestant: { name: "Jane Smith", gender: "Female", tribename: "Tribal" } } }
         let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', admin: true) }
         let(:Authorization) do
@@ -384,7 +384,7 @@ RSpec.describe "Contestants", type: :request do
           response.headers['Authorization']
         end
         let!(:season) { Season.create!(number: 47) }
-        let(:id) { Contestant.create(name: "Jane Doe", gender: "Female", tribename: "Tribal", season: season).id }
+        let(:id) { Contestant.create(person: Person.create!(name: "Jane Doe", gender: "Female"), tribename: "Tribal", season: season).id }
         run_test!
       end
 

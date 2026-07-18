@@ -10,6 +10,7 @@ class Pick < ApplicationRecord
   validate :male_contestant_is_male
   validate :female_contestant_is_female
   validate :contestants_match_season
+  validate :golden_goose_is_not_male_or_female_pick
 
   private
 
@@ -34,6 +35,16 @@ class Pick < ApplicationRecord
       if contestant.season_id != season_id
         errors.add(:base, "#{contestant.name} is not in season #{season&.number}")
       end
+    end
+  end
+
+  def golden_goose_is_not_male_or_female_pick
+    return if golden_goose_contestant_id.blank?
+
+    if golden_goose_contestant_id == male_contestant_id
+      errors.add(:golden_goose_contestant, "can't also be your male pick")
+    elsif golden_goose_contestant_id == female_contestant_id
+      errors.add(:golden_goose_contestant, "can't also be your female pick")
     end
   end
 end

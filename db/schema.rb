@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_11_185340) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_14_151850) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,19 +18,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_11_185340) do
     t.integer "age"
     t.text "bio"
     t.datetime "created_at", null: false
-    t.string "gender", null: false
-    t.string "name", null: false
     t.string "occupation"
+    t.bigint "person_id", null: false
     t.string "photo_url"
     t.bigint "season_id", null: false
     t.string "tribename"
     t.datetime "updated_at", null: false
     t.string "video_url"
+    t.index ["person_id"], name: "index_contestants_on_person_id"
     t.index ["season_id"], name: "index_contestants_on_season_id"
   end
 
   create_table "episode_scores", force: :cascade do |t|
     t.bigint "contestant_id", null: false
+    t.integer "count", default: 1, null: false
     t.datetime "created_at", null: false
     t.integer "episode_number", null: false
     t.integer "points", null: false
@@ -41,6 +42,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_11_185340) do
     t.index ["contestant_id"], name: "index_episode_scores_on_contestant_id"
     t.index ["scoring_event_id"], name: "index_episode_scores_on_scoring_event_id"
     t.index ["season_id"], name: "index_episode_scores_on_season_id"
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "gender", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "picks", force: :cascade do |t|
@@ -89,6 +97,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_11_185340) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "contestants", "people"
   add_foreign_key "contestants", "seasons"
   add_foreign_key "episode_scores", "contestants"
   add_foreign_key "episode_scores", "scoring_events"

@@ -1,9 +1,10 @@
 class Contestant < ApplicationRecord
     belongs_to :season
+    belongs_to :person
     has_many :episode_scores, dependent: :destroy
 
-    validates :name, presence: true
-    validates :gender, presence: true
+    delegate :name, :gender, to: :person
+
     validates :age, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
 
     validate :photo_url_is_valid
@@ -11,6 +12,10 @@ class Contestant < ApplicationRecord
 
     def total_points
       episode_scores.sum(&:points)
+    end
+
+    def as_json(options = {})
+      super(options.merge(methods: [ :name, :gender ]))
     end
 
     private

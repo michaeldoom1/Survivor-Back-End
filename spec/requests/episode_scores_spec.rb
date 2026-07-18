@@ -85,7 +85,7 @@ RSpec.describe "EpisodeScores", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 47) }
-        let!(:contestant) { Contestant.create!(name: "Coach", gender: "Male", season: season) }
+        let!(:contestant) { Contestant.create!(person: Person.create!(name: "Coach", gender: "Male"), season: season) }
         let!(:scoring_event) { ScoringEvent.create!(name: "Won Individual Immunity", points: 5) }
         let(:params) do
           { episode_score: { contestant_id: contestant.id, scoring_event_id: scoring_event.id, episode_number: 3, season_id: season.id } }
@@ -107,7 +107,7 @@ RSpec.describe "EpisodeScores", type: :request do
         end
         let!(:season) { Season.create!(number: 47) }
         let!(:other_season) { Season.create!(number: 46) }
-        let!(:contestant) { Contestant.create!(name: "Old Timer", gender: "Male", season: other_season) }
+        let!(:contestant) { Contestant.create!(person: Person.create!(name: "Old Timer", gender: "Male"), season: other_season) }
         let!(:scoring_event) { ScoringEvent.create!(name: "Won Individual Immunity", points: 5) }
         let(:params) do
           { episode_score: { contestant_id: contestant.id, scoring_event_id: scoring_event.id, episode_number: 3, season_id: season.id } }
@@ -128,7 +128,7 @@ RSpec.describe "EpisodeScores", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 47) }
-        let!(:contestant) { Contestant.create!(name: "Coach", gender: "Male", season: season) }
+        let!(:contestant) { Contestant.create!(person: Person.create!(name: "Coach", gender: "Male"), season: season) }
         let!(:scoring_event) { ScoringEvent.create!(name: "Won Individual Immunity", points: 5) }
         let(:params) do
           { episode_score: { contestant_id: contestant.id, scoring_event_id: scoring_event.id, episode_number: 3, season_id: season.id } }
@@ -165,7 +165,7 @@ RSpec.describe "EpisodeScores", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 47) }
-        let!(:contestant) { Contestant.create!(name: "Coach", gender: "Male", season: season) }
+        let!(:contestant) { Contestant.create!(person: Person.create!(name: "Coach", gender: "Male"), season: season) }
         let!(:scoring_event) { ScoringEvent.create!(name: "Won Individual Immunity", points: 5) }
         let(:id) do
           EpisodeScore.create!(contestant: contestant, scoring_event: scoring_event, episode_number: 3, season: season).id
@@ -230,7 +230,7 @@ RSpec.describe "EpisodeScores", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 47) }
-        let!(:contestant) { Contestant.create!(name: "Coach", gender: "Male", season: season) }
+        let!(:contestant) { Contestant.create!(person: Person.create!(name: "Coach", gender: "Male"), season: season) }
         let!(:scoring_event) { ScoringEvent.create!(name: "Won Individual Immunity", points: 5) }
         let(:id) do
           EpisodeScore.create!(contestant: contestant, scoring_event: scoring_event, episode_number: 3, season: season).id
@@ -273,7 +273,7 @@ RSpec.describe "EpisodeScores", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 47) }
-        let!(:contestant) { Contestant.create!(name: "Coach", gender: "Male", season: season) }
+        let!(:contestant) { Contestant.create!(person: Person.create!(name: "Coach", gender: "Male"), season: season) }
         let!(:scoring_event) { ScoringEvent.create!(name: "Won Individual Immunity", points: 5) }
         let(:id) do
           EpisodeScore.create!(contestant: contestant, scoring_event: scoring_event, episode_number: 3, season: season).id

@@ -82,9 +82,9 @@ RSpec.describe "Picks", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 47) }
-        let!(:male) { Contestant.create!(name: "Male One", gender: "Male", season: season) }
-        let!(:female) { Contestant.create!(name: "Female One", gender: "Female", season: season) }
-        let!(:goose) { Contestant.create!(name: "Goose One", gender: "Female", season: season) }
+        let!(:male) { Contestant.create!(person: Person.create!(name: "Male One", gender: "Male"), season: season) }
+        let!(:female) { Contestant.create!(person: Person.create!(name: "Female One", gender: "Female"), season: season) }
+        let!(:goose) { Contestant.create!(person: Person.create!(name: "Goose One", gender: "Female"), season: season) }
         let!(:other_pick) do
           Pick.create!(user: other_user, season: season, male_contestant: male, female_contestant: female, golden_goose_contestant: goose)
         end
@@ -167,9 +167,9 @@ RSpec.describe "Picks", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 47) }
-        let!(:male) { Contestant.create!(name: "Male One", gender: "Male", season: season) }
-        let!(:female) { Contestant.create!(name: "Female One", gender: "Female", season: season) }
-        let!(:goose) { Contestant.create!(name: "Goose One", gender: "Female", season: season) }
+        let!(:male) { Contestant.create!(person: Person.create!(name: "Male One", gender: "Male"), season: season) }
+        let!(:female) { Contestant.create!(person: Person.create!(name: "Female One", gender: "Female"), season: season) }
+        let!(:goose) { Contestant.create!(person: Person.create!(name: "Goose One", gender: "Female"), season: season) }
         let(:params) do
           { pick: { season_id: season.id, male_contestant_id: male.id, female_contestant_id: female.id, golden_goose_contestant_id: goose.id } }
         end
@@ -189,8 +189,8 @@ RSpec.describe "Picks", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 48) }
-        let!(:male) { Contestant.create!(name: "Male One", gender: "Male", season: season) }
-        let!(:female) { Contestant.create!(name: "Female One", gender: "Female", season: season) }
+        let!(:male) { Contestant.create!(person: Person.create!(name: "Male One", gender: "Male"), season: season) }
+        let!(:female) { Contestant.create!(person: Person.create!(name: "Female One", gender: "Female"), season: season) }
         let(:params) do
           { pick: { season_id: season.id, male_contestant_id: female.id, female_contestant_id: female.id, golden_goose_contestant_id: male.id } }
         end
@@ -239,9 +239,9 @@ RSpec.describe "Picks", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 50) }
-        let!(:male) { Contestant.create!(name: "Male One", gender: "Male", season: season) }
-        let!(:female) { Contestant.create!(name: "Female One", gender: "Female", season: season) }
-        let!(:goose) { Contestant.create!(name: "Goose One", gender: "Female", season: season) }
+        let!(:male) { Contestant.create!(person: Person.create!(name: "Male One", gender: "Male"), season: season) }
+        let!(:female) { Contestant.create!(person: Person.create!(name: "Female One", gender: "Female"), season: season) }
+        let!(:goose) { Contestant.create!(person: Person.create!(name: "Goose One", gender: "Female"), season: season) }
         let(:id) do
           Pick.create!(user: existing_user, season: season, male_contestant: male, female_contestant: female, golden_goose_contestant: goose).id
         end
@@ -318,10 +318,10 @@ RSpec.describe "Picks", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 51) }
-        let!(:male) { Contestant.create!(name: "Male One", gender: "Male", season: season) }
-        let!(:female) { Contestant.create!(name: "Female One", gender: "Female", season: season) }
-        let!(:goose) { Contestant.create!(name: "Goose One", gender: "Female", season: season) }
-        let!(:goose2) { Contestant.create!(name: "Goose Two", gender: "Male", season: season) }
+        let!(:male) { Contestant.create!(person: Person.create!(name: "Male One", gender: "Male"), season: season) }
+        let!(:female) { Contestant.create!(person: Person.create!(name: "Female One", gender: "Female"), season: season) }
+        let!(:goose) { Contestant.create!(person: Person.create!(name: "Goose One", gender: "Female"), season: season) }
+        let!(:goose2) { Contestant.create!(person: Person.create!(name: "Goose Two", gender: "Male"), season: season) }
         let(:id) do
           Pick.create!(user: existing_user, season: season, male_contestant: male, female_contestant: female, golden_goose_contestant: goose).id
         end
@@ -363,9 +363,9 @@ RSpec.describe "Picks", type: :request do
           response.headers["Authorization"]
         end
         let!(:season) { Season.create!(number: 53) }
-        let!(:male) { Contestant.create!(name: "Male One", gender: "Male", season: season) }
-        let!(:female) { Contestant.create!(name: "Female One", gender: "Female", season: season) }
-        let!(:goose) { Contestant.create!(name: "Goose One", gender: "Female", season: season) }
+        let!(:male) { Contestant.create!(person: Person.create!(name: "Male One", gender: "Male"), season: season) }
+        let!(:female) { Contestant.create!(person: Person.create!(name: "Female One", gender: "Female"), season: season) }
+        let!(:goose) { Contestant.create!(person: Person.create!(name: "Goose One", gender: "Female"), season: season) }
         let(:id) do
           Pick.create!(user: existing_user, season: season, male_contestant: male, female_contestant: female, golden_goose_contestant: goose).id
         end

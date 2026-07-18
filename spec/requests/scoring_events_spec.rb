@@ -252,7 +252,7 @@ RSpec.describe "ScoringEvents", type: :request do
         end
         let!(:scoring_event) { ScoringEvent.create!(name: "Won Individual Immunity", points: 5) }
         let!(:season) { Season.create!(number: 47) }
-        let!(:contestant) { Contestant.create!(name: "Coach", gender: "Male", season: season) }
+        let!(:contestant) { Contestant.create!(person: Person.create!(name: "Coach", gender: "Male"), season: season) }
         let!(:episode_score) do
           EpisodeScore.create!(contestant: contestant, scoring_event: scoring_event, episode_number: 1, season: season)
         end

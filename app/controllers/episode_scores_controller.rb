@@ -46,6 +46,6 @@ class EpisodeScoresController < ApplicationController
   end
 
   def episode_score_params
-    params.require(:episode_score).permit(:contestant_id, :scoring_event_id, :episode_number, :season_id)
+    params.require(:episode_score).permit(:contestant_id, :scoring_event_id, :episode_number, :season_id, :count)
   end
 end
