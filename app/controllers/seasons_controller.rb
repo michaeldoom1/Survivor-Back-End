@@ -49,6 +49,6 @@ class SeasonsController < ApplicationController
   end
 
   def season_params
-    params.require(:season).permit(:number)
+    params.require(:season).permit(:number, :start_air_date)
   end
 end
