@@ -33,7 +33,7 @@ RSpec.describe 'Authentication', type: :request do
                  }
                }
         let(:params) do
-          { user: { email: 'friend@example.com', password: 'password123', password_confirmation: 'password123' } }
+          { user: { email: 'friend@example.com', password: 'password123', first_name: "Test", last_name: "User", password_confirmation: 'password123' } }
         end
         run_test!
       end
@@ -81,8 +81,8 @@ RSpec.describe 'Authentication', type: :request do
                    }
                  }
                }
-        let!(:existing_user) { User.create!(email: 'friend@example.com', password: 'password123') }
-        let(:params) { { user: { email: 'friend@example.com', password: 'password123' } } }
+        let!(:existing_user) { User.create!(email: 'friend@example.com', password: 'password123', first_name: "Test", last_name: "User") }
+        let(:params) { { user: { email: 'friend@example.com', password: 'password123', first_name: "Test", last_name: "User" } } }
         run_test!
       end
 
@@ -108,10 +108,10 @@ RSpec.describe 'Authentication', type: :request do
                properties: {
                  message: { type: :string }
                }
-        let!(:existing_user) { User.create!(email: 'friend@example.com', password: 'password123') }
+        let!(:existing_user) { User.create!(email: 'friend@example.com', password: 'password123', first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post '/login',
-               params: { user: { email: 'friend@example.com', password: 'password123' } }.to_json,
+               params: { user: { email: 'friend@example.com', password: 'password123', first_name: "Test", last_name: "User" } }.to_json,
                headers: { 'Content-Type' => 'application/json' }
           response.headers['Authorization']
         end
@@ -146,10 +146,10 @@ RSpec.describe 'Authentication', type: :request do
                    }
                  }
                }
-        let!(:existing_user) { User.create!(email: 'friend@example.com', password: 'password123') }
+        let!(:existing_user) { User.create!(email: 'friend@example.com', password: 'password123', first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post '/login',
-               params: { user: { email: 'friend@example.com', password: 'password123' } }.to_json,
+               params: { user: { email: 'friend@example.com', password: 'password123', first_name: "Test", last_name: "User" } }.to_json,
                headers: { 'Content-Type' => 'application/json' }
           response.headers['Authorization']
         end

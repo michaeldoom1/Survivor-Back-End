@@ -19,10 +19,10 @@ RSpec.describe "ScoringEvents", type: :request do
                    updated_at: { type: :string }
                  }
                }
-        let!(:existing_user) { User.create!(email: "user@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "user@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "user@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "user@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -69,10 +69,10 @@ RSpec.describe "ScoringEvents", type: :request do
                  created_at: { type: :string },
                  updated_at: { type: :string }
                }
-        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", admin: true) }
+        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "admin@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -85,10 +85,10 @@ RSpec.describe "ScoringEvents", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", admin: true) }
+        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "admin@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -101,10 +101,10 @@ RSpec.describe "ScoringEvents", type: :request do
                properties: {
                  error: { type: :string }
                }
-        let!(:existing_user) { User.create!(email: "user@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "user@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "user@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "user@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -130,10 +130,10 @@ RSpec.describe "ScoringEvents", type: :request do
                  created_at: { type: :string },
                  updated_at: { type: :string }
                }
-        let!(:existing_user) { User.create!(email: "user@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "user@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "user@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "user@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -146,10 +146,10 @@ RSpec.describe "ScoringEvents", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:existing_user) { User.create!(email: "user@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "user@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "user@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "user@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -188,10 +188,10 @@ RSpec.describe "ScoringEvents", type: :request do
                  created_at: { type: :string },
                  updated_at: { type: :string }
                }
-        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", admin: true) }
+        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "admin@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -205,10 +205,10 @@ RSpec.describe "ScoringEvents", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", admin: true) }
+        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "admin@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -227,10 +227,10 @@ RSpec.describe "ScoringEvents", type: :request do
       security [ bearerAuth: [] ]
 
       response "204", "scoring event deleted" do
-        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", admin: true) }
+        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "admin@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -243,10 +243,10 @@ RSpec.describe "ScoringEvents", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", admin: true) }
+        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "admin@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -265,10 +265,10 @@ RSpec.describe "ScoringEvents", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", admin: true) }
+        let!(:admin_user) { User.create!(email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "admin@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "admin@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end

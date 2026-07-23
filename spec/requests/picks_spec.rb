@@ -22,10 +22,10 @@ RSpec.describe "Picks", type: :request do
                    updated_at: { type: :string }
                  }
                }
-        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "picker@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -56,28 +56,29 @@ RSpec.describe "Picks", type: :request do
                  type: :object,
                  properties: {
                    user_id: { type: :integer },
-                   email: { type: :string },
+                   user_name: { type: :string },
                    season_id: { type: :integer },
                    season_number: { type: :integer },
                    male_contestant: {
                      type: :object,
-                     properties: { id: { type: :integer }, name: { type: :string } }
+                     properties: { id: { type: :integer }, name: { type: :string }, points: { type: :integer } }
                    },
                    female_contestant: {
                      type: :object,
-                     properties: { id: { type: :integer }, name: { type: :string } }
+                     properties: { id: { type: :integer }, name: { type: :string }, points: { type: :integer } }
                    },
                    golden_goose_contestant: {
                      type: :object,
-                     properties: { id: { type: :integer }, name: { type: :string } }
-                   }
+                     properties: { id: { type: :integer }, name: { type: :string }, points: { type: :integer } }
+                   },
+                   total_points: { type: :integer }
                  }
                }
-        let!(:requesting_user) { User.create!(email: "requester@example.com", password: "password123") }
-        let!(:other_user) { User.create!(email: "otheruser@example.com", password: "password123") }
+        let!(:requesting_user) { User.create!(email: "requester@example.com", password: "password123", first_name: "Test", last_name: "User") }
+        let!(:other_user) { User.create!(email: "otheruser@example.com", password: "password123", first_name: "Other", last_name: "Person") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "requester@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "requester@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -91,7 +92,7 @@ RSpec.describe "Picks", type: :request do
         let(:season_id) { season.id }
         run_test! do |response|
           body = JSON.parse(response.body)
-          expect(body.first["email"]).to eq("otheruser@example.com")
+          expect(body.first["user_name"]).to eq("Other Person")
           expect(body.first["male_contestant"]["name"]).to eq("Male One")
         end
       end
@@ -101,10 +102,10 @@ RSpec.describe "Picks", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:existing_user) { User.create!(email: "requester@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "requester@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "requester@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "requester@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -159,10 +160,10 @@ RSpec.describe "Picks", type: :request do
                  created_at: { type: :string },
                  updated_at: { type: :string }
                }
-        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "picker@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -181,10 +182,10 @@ RSpec.describe "Picks", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "picker@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -231,10 +232,10 @@ RSpec.describe "Picks", type: :request do
                  created_at: { type: :string },
                  updated_at: { type: :string }
                }
-        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "picker@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -253,10 +254,10 @@ RSpec.describe "Picks", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "picker@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -310,10 +311,10 @@ RSpec.describe "Picks", type: :request do
                  created_at: { type: :string },
                  updated_at: { type: :string }
                }
-        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "picker@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -334,10 +335,10 @@ RSpec.describe "Picks", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "picker@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -355,10 +356,10 @@ RSpec.describe "Picks", type: :request do
       security [ bearerAuth: [] ]
 
       response "204", "pick deleted" do
-        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "picker@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -377,10 +378,10 @@ RSpec.describe "Picks", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "picker@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "picker@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end

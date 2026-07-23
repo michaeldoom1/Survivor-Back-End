@@ -598,7 +598,7 @@ season_50_episode_scores = [
   { episode: 13, contestant: "Tiffany", event: "Voting for the winner" },
   { episode: 13, contestant: "Rizo", event: "Voting for the winner" },
   { episode: 13, contestant: "Jonathan", event: "Receiving a vote to win", count: 3 },
-  { episode: 13, contestant: "Aubry", event: "Receiving a vote to win", count: 7 },
+  { episode: 13, contestant: "Aubry", event: "Receiving a vote to win", count: 7 }
 ]
 
 season_50 = Season.find_by!(number: 50)
@@ -906,7 +906,7 @@ season_49_episode_scores = [
   { episode: 13, contestant: "Steven", event: "Voting for the winner" },
   { episode: 13, contestant: "Sophi", event: "Receiving a vote to win", count: 2 },
   { episode: 13, contestant: "Sage", event: "Receiving a vote to win" },
-  { episode: 13, contestant: "Savannah", event: "Receiving a vote to win", count: 4 },
+  { episode: 13, contestant: "Savannah", event: "Receiving a vote to win", count: 4 }
 ]
 
 season_49 = Season.find_by!(number: 49)
@@ -1220,7 +1220,7 @@ season_48_episode_scores = [
   { episode: 13, contestant: "Shauhin", event: "Voting for the winner" },
   { episode: 13, contestant: "Kyle", event: "Receiving a vote to win", count: 5 },
   { episode: 13, contestant: "Joe", event: "Receiving a vote to win" },
-  { episode: 13, contestant: "Eva", event: "Receiving a vote to win", count: 2 },
+  { episode: 13, contestant: "Eva", event: "Receiving a vote to win", count: 2 }
 ]
 
 season_48 = Season.find_by!(number: 48)
@@ -1557,7 +1557,7 @@ season_47_episode_scores = [
   { episode: 14, contestant: "Caroline", event: "Voting for the winner" },
   { episode: 14, contestant: "Gabe", event: "Voting for the winner" },
   { episode: 14, contestant: "Rachel", event: "Receiving a vote to win", count: 7 },
-  { episode: 14, contestant: "Sam", event: "Receiving a vote to win" },
+  { episode: 14, contestant: "Sam", event: "Receiving a vote to win" }
 ]
 
 season_47 = Season.find_by!(number: 47)
@@ -1858,7 +1858,7 @@ season_46_episode_scores = [
   { episode: 13, contestant: "Q", event: "Voting for the winner" },
   { episode: 13, contestant: "Tiffany", event: "Voting for the winner" },
   { episode: 13, contestant: "Ben", event: "Receiving a vote to win", count: 3 },
-  { episode: 13, contestant: "Kenzie", event: "Receiving a vote to win", count: 5 },
+  { episode: 13, contestant: "Kenzie", event: "Receiving a vote to win", count: 5 }
 ]
 
 season_46 = Season.find_by!(number: 46)
@@ -2163,7 +2163,7 @@ season_45_episode_scores = [
   { episode: 13, contestant: "Kaleb", event: "Voting for the winner" },
   { episode: 13, contestant: "Julie", event: "Voting for the winner" },
   { episode: 13, contestant: "Austin", event: "Receiving a vote to win", count: 3 },
-  { episode: 13, contestant: "Dee", event: "Receiving a vote to win", count: 5 },
+  { episode: 13, contestant: "Dee", event: "Receiving a vote to win", count: 5 }
 ]
 
 season_45 = Season.find_by!(number: 45)
@@ -2433,7 +2433,7 @@ season_44_episode_scores = [
   { episode: 13, contestant: "Frannie", event: "Voting for the winner" },
   { episode: 13, contestant: "Matt", event: "Voting for the winner" },
   { episode: 13, contestant: "Yam Yam", event: "Receiving a vote to win", count: 7 },
-  { episode: 13, contestant: "Heidi", event: "Receiving a vote to win" },
+  { episode: 13, contestant: "Heidi", event: "Receiving a vote to win" }
 ]
 
 season_44 = Season.find_by!(number: 44)

@@ -25,10 +25,10 @@ RSpec.describe "Contestants", type: :request do
                    updated_at: { type: :string }
                  }
                }
-        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', admin: false) }
+        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User", admin: false) }
         let(:Authorization) do
           post '/login',
-          params: { user: { email: 'admin@example.com', password: 'password123' } }.to_json,
+          params: { user: { email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User" } }.to_json,
           headers: { 'Content-Type' => 'application/json' }
           response.headers['Authorization']
         end
@@ -77,10 +77,10 @@ RSpec.describe "Contestants", type: :request do
                    }
                  }
                }
-        let!(:existing_user) { User.create!(email: "scores_user@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "scores_user@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "scores_user@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "scores_user@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -103,10 +103,10 @@ RSpec.describe "Contestants", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:existing_user) { User.create!(email: "scores_user@example.com", password: "password123") }
+        let!(:existing_user) { User.create!(email: "scores_user@example.com", password: "password123", first_name: "Test", last_name: "User") }
         let(:Authorization) do
           post "/login",
-               params: { user: { email: "scores_user@example.com", password: "password123" } }.to_json,
+               params: { user: { email: "scores_user@example.com", password: "password123", first_name: "Test", last_name: "User" } }.to_json,
                headers: { "Content-Type" => "application/json" }
           response.headers["Authorization"]
         end
@@ -170,10 +170,10 @@ RSpec.describe "Contestants", type: :request do
                  created_at: { type: :string },
                  updated_at: { type: :string }
                }
-        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', admin: true) }
+        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post '/login',
-          params: { user: { email: 'admin@example.com', password: 'password123' } }.to_json,
+          params: { user: { email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User" } }.to_json,
           headers: { 'Content-Type' => 'application/json' }
           response.headers['Authorization']
         end
@@ -199,10 +199,10 @@ RSpec.describe "Contestants", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', admin: true) }
+        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post '/login',
-          params: { user: { email: 'admin@example.com', password: 'password123' } }.to_json,
+          params: { user: { email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User" } }.to_json,
           headers: { 'Content-Type' => 'application/json' }
           response.headers['Authorization']
         end
@@ -217,10 +217,10 @@ RSpec.describe "Contestants", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', admin: true) }
+        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post '/login',
-          params: { user: { email: 'admin@example.com', password: 'password123' } }.to_json,
+          params: { user: { email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User" } }.to_json,
           headers: { 'Content-Type' => 'application/json' }
           response.headers['Authorization']
         end
@@ -259,10 +259,10 @@ RSpec.describe "Contestants", type: :request do
                  created_at: { type: :string },
                  updated_at: { type: :string }
                }
-        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', admin: false) }
+        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User", admin: false) }
         let(:Authorization) do
           post '/login',
-          params: { user: { email: 'admin@example.com', password: 'password123' } }.to_json,
+          params: { user: { email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User" } }.to_json,
           headers: { 'Content-Type' => 'application/json' }
           response.headers['Authorization']
         end
@@ -276,10 +276,10 @@ RSpec.describe "Contestants", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', admin: false) }
+        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User", admin: false) }
         let(:Authorization) do
           post '/login',
-          params: { user: { email: 'admin@example.com', password: 'password123' } }.to_json,
+          params: { user: { email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User" } }.to_json,
           headers: { 'Content-Type' => 'application/json' }
           response.headers['Authorization']
         end
@@ -341,10 +341,10 @@ RSpec.describe "Contestants", type: :request do
         let!(:season) { Season.create!(number: 47) }
         let(:id) { Contestant.create(person: Person.create!(name: "Jane Doe", gender: "Female"), tribename: "Tribal", season: season).id }
         let(:params) { { contestant: { name: "Jane Smith", gender: "Female", tribename: "Tribal" } } }
-        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', admin: true) }
+        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post '/login',
-               params: { user: { email: 'admin@example.com', password: 'password123' } }.to_json,
+               params: { user: { email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User" } }.to_json,
                headers: { 'Content-Type' => 'application/json' }
           response.headers['Authorization']
         end
@@ -356,10 +356,10 @@ RSpec.describe "Contestants", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', admin: true) }
+        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post '/login',
-               params: { user: { email: 'admin@example.com', password: 'password123' } }.to_json,
+               params: { user: { email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User" } }.to_json,
                headers: { 'Content-Type' => 'application/json' }
           response.headers['Authorization']
         end
@@ -376,10 +376,10 @@ RSpec.describe "Contestants", type: :request do
       parameter name: :id, in: :path, type: :string
       security [ bearerAuth: [] ]
       response "204", "contestant deleted" do
-        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', admin: true) }
+        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post '/login',
-               params: { user: { email: 'admin@example.com', password: 'password123' } }.to_json,
+               params: { user: { email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User" } }.to_json,
                headers: { 'Content-Type' => 'application/json' }
           response.headers['Authorization']
         end
@@ -393,10 +393,10 @@ RSpec.describe "Contestants", type: :request do
                properties: {
                  errors: { type: :array, items: { type: :string } }
                }
-        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', admin: true) }
+        let!(:existing_user) { User.create!(email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User", admin: true) }
         let(:Authorization) do
           post '/login',
-               params: { user: { email: 'admin@example.com', password: 'password123' } }.to_json,
+               params: { user: { email: 'admin@example.com', password: 'password123', first_name: "Test", last_name: "User" } }.to_json,
                headers: { 'Content-Type' => 'application/json' }
           response.headers['Authorization']
         end
