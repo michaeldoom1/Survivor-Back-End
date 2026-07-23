@@ -33,4 +33,6 @@ Rails.application.routes.draw do
   resources :scoring_events
   resources :episode_scores
   resources :seasons
+  resources :episode_posts, only: [ :index, :show, :create, :update, :destroy ]
+  resources :memes, only: [ :create, :destroy ]
 end

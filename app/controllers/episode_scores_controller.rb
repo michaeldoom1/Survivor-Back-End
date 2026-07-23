@@ -4,7 +4,10 @@ class EpisodeScoresController < ApplicationController
   before_action :set_episode_score, only: [ :show, :update, :destroy ]
 
   def index
-    render json: EpisodeScore.all
+    scores = EpisodeScore.all
+    scores = scores.where(season_id: params[:season_id]) if params[:season_id].present?
+    scores = scores.where(episode_number: params[:episode_number]) if params[:episode_number].present?
+    render json: scores
   end
 
   def show

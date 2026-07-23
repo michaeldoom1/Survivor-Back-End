@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_21_202134) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_23_014519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -29,6 +29,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_21_202134) do
     t.index ["season_id"], name: "index_contestants_on_season_id"
   end
 
+  create_table "episode_posts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "episode_number", null: false
+    t.text "recap"
+    t.bigint "season_id", null: false
+    t.text "superlatives"
+    t.datetime "updated_at", null: false
+    t.index ["season_id", "episode_number"], name: "index_episode_posts_on_season_id_and_episode_number", unique: true
+    t.index ["season_id"], name: "index_episode_posts_on_season_id"
+  end
+
   create_table "episode_scores", force: :cascade do |t|
     t.bigint "contestant_id", null: false
     t.integer "count", default: 1, null: false
@@ -42,6 +53,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_21_202134) do
     t.index ["contestant_id"], name: "index_episode_scores_on_contestant_id"
     t.index ["scoring_event_id"], name: "index_episode_scores_on_scoring_event_id"
     t.index ["season_id"], name: "index_episode_scores_on_season_id"
+  end
+
+  create_table "memes", force: :cascade do |t|
+    t.string "bluesky_url"
+    t.string "caption"
+    t.datetime "created_at", null: false
+    t.bigint "episode_post_id", null: false
+    t.string "image_url"
+    t.string "source_url"
+    t.datetime "updated_at", null: false
+    t.index ["episode_post_id"], name: "index_memes_on_episode_post_id"
   end
 
   create_table "people", force: :cascade do |t|
@@ -104,9 +126,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_21_202134) do
 
   add_foreign_key "contestants", "people"
   add_foreign_key "contestants", "seasons"
+  add_foreign_key "episode_posts", "seasons"
   add_foreign_key "episode_scores", "contestants"
   add_foreign_key "episode_scores", "scoring_events"
   add_foreign_key "episode_scores", "seasons"
+  add_foreign_key "memes", "episode_posts"
   add_foreign_key "picks", "contestants", column: "female_contestant_id"
   add_foreign_key "picks", "contestants", column: "golden_goose_contestant_id"
   add_foreign_key "picks", "contestants", column: "male_contestant_id"
