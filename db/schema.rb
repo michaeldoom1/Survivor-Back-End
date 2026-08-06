@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_06_022022) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_06_025301) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -89,6 +89,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_022022) do
     t.index ["user_id"], name: "index_picks_on_user_id"
   end
 
+  create_table "poll_comments", force: :cascade do |t|
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.bigint "poll_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["poll_id", "user_id"], name: "index_poll_comments_on_poll_id_and_user_id", unique: true
+    t.index ["poll_id"], name: "index_poll_comments_on_poll_id"
+    t.index ["user_id"], name: "index_poll_comments_on_user_id"
+  end
+
   create_table "poll_options", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "poll_id", null: false
@@ -98,7 +109,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_022022) do
   end
 
   create_table "poll_votes", force: :cascade do |t|
-    t.text "comment"
     t.datetime "created_at", null: false
     t.bigint "poll_id", null: false
     t.bigint "poll_option_id", null: false
@@ -165,6 +175,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_022022) do
   add_foreign_key "picks", "contestants", column: "male_contestant_id"
   add_foreign_key "picks", "seasons"
   add_foreign_key "picks", "users"
+  add_foreign_key "poll_comments", "polls"
+  add_foreign_key "poll_comments", "users"
   add_foreign_key "poll_options", "polls"
   add_foreign_key "poll_votes", "poll_options"
   add_foreign_key "poll_votes", "polls"

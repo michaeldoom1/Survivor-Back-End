@@ -6,7 +6,7 @@ class PollsController < ApplicationController
   def index
     episode_post_id = params.require(:episode_post_id)
     polls = Poll.where(episode_post_id: episode_post_id)
-                .includes(poll_options: :poll_votes, poll_votes: :user)
+                .includes(:episode_post, poll_options: :poll_votes, poll_votes: :user, poll_comments: :user)
 
     render json: polls.map { |poll| poll.result_json(current_user) }
   end

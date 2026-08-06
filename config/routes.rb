@@ -37,4 +37,5 @@ Rails.application.routes.draw do
   resources :memes, only: [ :create, :destroy ]
   resources :polls, only: [ :index, :create, :destroy ]
   resources :poll_votes, only: [ :create ]
+  resources :poll_comments, only: [ :create ]
 end
