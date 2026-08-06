@@ -5,7 +5,6 @@ RSpec.describe "ScoringEvents", type: :request do
     get "Retrieves all scoring events" do
       tags "ScoringEvents"
       produces "application/json"
-      security [ bearerAuth: [] ]
 
       response "200", "scoring events found" do
         schema type: :array,
@@ -29,11 +28,8 @@ RSpec.describe "ScoringEvents", type: :request do
         run_test!
       end
 
-      response "401", "unauthenticated" do
-        schema type: :object,
-               properties: {
-                 error: { type: :string }
-               }
+      response "200", "works without authentication" do
+        schema type: :array, items: { type: :object }
         let(:Authorization) { nil }
         run_test!
       end
@@ -119,7 +115,6 @@ RSpec.describe "ScoringEvents", type: :request do
       tags "ScoringEvents"
       produces "application/json"
       parameter name: :id, in: :path, type: :string
-      security [ bearerAuth: [] ]
 
       response "200", "scoring event found" do
         schema type: :object,
@@ -154,6 +149,13 @@ RSpec.describe "ScoringEvents", type: :request do
           response.headers["Authorization"]
         end
         let(:id) { "invalid" }
+        run_test!
+      end
+
+      response "200", "works without authentication" do
+        schema type: :object
+        let(:Authorization) { nil }
+        let(:id) { ScoringEvent.create!(name: "Won Individual Immunity", points: 5).id }
         run_test!
       end
     end

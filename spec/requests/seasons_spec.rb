@@ -5,7 +5,6 @@ RSpec.describe "Seasons", type: :request do
     get "Retrieves all seasons" do
       tags "Seasons"
       produces "application/json"
-      security [ bearerAuth: [] ]
 
       response "200", "seasons found" do
         schema type: :array,
@@ -28,11 +27,8 @@ RSpec.describe "Seasons", type: :request do
         run_test!
       end
 
-      response "401", "unauthenticated" do
-        schema type: :object,
-               properties: {
-                 error: { type: :string }
-               }
+      response "200", "works without authentication" do
+        schema type: :array, items: { type: :object }
         let(:Authorization) { nil }
         run_test!
       end
@@ -117,7 +113,6 @@ RSpec.describe "Seasons", type: :request do
       tags "Seasons"
       produces "application/json"
       parameter name: :id, in: :path, type: :string
-      security [ bearerAuth: [] ]
 
       response "200", "season found" do
         schema type: :object,
@@ -151,6 +146,13 @@ RSpec.describe "Seasons", type: :request do
           response.headers["Authorization"]
         end
         let(:id) { "invalid" }
+        run_test!
+      end
+
+      response "200", "works without authentication" do
+        schema type: :object
+        let(:Authorization) { nil }
+        let(:id) { Season.create!(number: 47).id }
         run_test!
       end
     end

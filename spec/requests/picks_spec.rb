@@ -48,7 +48,6 @@ RSpec.describe "Picks", type: :request do
       tags "Picks"
       produces "application/json"
       parameter name: :season_id, in: :query, type: :integer, required: true
-      security [ bearerAuth: [] ]
 
       response "200", "picks found" do
         schema type: :array,
@@ -113,11 +112,8 @@ RSpec.describe "Picks", type: :request do
         run_test!
       end
 
-      response "401", "unauthenticated" do
-        schema type: :object,
-               properties: {
-                 error: { type: :string }
-               }
+      response "200", "works without authentication" do
+        schema type: :array, items: { type: :object }
         let(:Authorization) { nil }
         let!(:season) { Season.create!(number: 47) }
         let(:season_id) { season.id }

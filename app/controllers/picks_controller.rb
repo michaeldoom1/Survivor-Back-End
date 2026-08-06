@@ -1,5 +1,5 @@
 class PicksController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [ :by_season ]
   before_action :set_pick, only: [ :show, :update, :destroy ]
 
   # The golden goose pick counts for double whatever that contestant actually scored.

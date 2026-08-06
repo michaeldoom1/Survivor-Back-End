@@ -1,5 +1,5 @@
 class ContestantsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [ :index, :show, :scores ]
   before_action :require_admin!, only: [ :create, :update, :destroy ]
 
   def index

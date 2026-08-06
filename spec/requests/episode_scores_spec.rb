@@ -5,7 +5,6 @@ RSpec.describe "EpisodeScores", type: :request do
     get "Retrieves all episode scores" do
       tags "EpisodeScores"
       produces "application/json"
-      security [ bearerAuth: [] ]
 
       response "200", "episode scores found" do
         schema type: :array,
@@ -32,11 +31,8 @@ RSpec.describe "EpisodeScores", type: :request do
         run_test!
       end
 
-      response "401", "unauthenticated" do
-        schema type: :object,
-               properties: {
-                 error: { type: :string }
-               }
+      response "200", "works without authentication" do
+        schema type: :array, items: { type: :object }
         let(:Authorization) { nil }
         run_test!
       end
@@ -143,7 +139,6 @@ RSpec.describe "EpisodeScores", type: :request do
       tags "EpisodeScores"
       produces "application/json"
       parameter name: :id, in: :path, type: :string
-      security [ bearerAuth: [] ]
 
       response "200", "episode score found" do
         schema type: :object,
@@ -186,6 +181,18 @@ RSpec.describe "EpisodeScores", type: :request do
           response.headers["Authorization"]
         end
         let(:id) { "invalid" }
+        run_test!
+      end
+
+      response "200", "works without authentication" do
+        schema type: :object
+        let(:Authorization) { nil }
+        let!(:season) { Season.create!(number: 47) }
+        let!(:contestant) { Contestant.create!(person: Person.create!(name: "Coach", gender: "Male"), season: season) }
+        let!(:scoring_event) { ScoringEvent.create!(name: "Won Individual Immunity", points: 5) }
+        let(:id) do
+          EpisodeScore.create!(contestant: contestant, scoring_event: scoring_event, episode_number: 3, season: season).id
+        end
         run_test!
       end
     end

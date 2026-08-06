@@ -35,4 +35,6 @@ Rails.application.routes.draw do
   resources :seasons
   resources :episode_posts, only: [ :index, :show, :create, :update, :destroy ]
   resources :memes, only: [ :create, :destroy ]
+  resources :polls, only: [ :index, :create, :destroy ]
+  resources :poll_votes, only: [ :create ]
 end

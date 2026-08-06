@@ -1,6 +1,7 @@
 class EpisodePost < ApplicationRecord
   belongs_to :season
   has_many :memes, dependent: :destroy
+  has_many :polls, dependent: :destroy
 
   validates :episode_number, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :episode_number, uniqueness: { scope: :season_id }

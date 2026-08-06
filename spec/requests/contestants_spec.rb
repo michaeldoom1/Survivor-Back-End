@@ -5,7 +5,6 @@ RSpec.describe "Contestants", type: :request do
     get "Retrieves all contestants" do
       tags "Contestants"
       produces "application/json"
-      security [ bearerAuth: [] ]
       response "200", "contestants found" do
         schema type: :array,
                items: {
@@ -35,11 +34,8 @@ RSpec.describe "Contestants", type: :request do
         run_test!
       end
 
-      response "401", "unauthenticated" do
-        schema type: :object,
-               properties: {
-                 error: { type: :string }
-               }
+      response "200", "works without authentication" do
+        schema type: :array, items: { type: :object }
         let(:Authorization) { nil }
         run_test!
       end
@@ -51,7 +47,6 @@ RSpec.describe "Contestants", type: :request do
       tags "Contestants"
       produces "application/json"
       parameter name: :season_id, in: :query, type: :integer, required: true
-      security [ bearerAuth: [] ]
 
       response "200", "scores found" do
         schema type: :array,
@@ -114,11 +109,8 @@ RSpec.describe "Contestants", type: :request do
         run_test!
       end
 
-      response "401", "unauthenticated" do
-        schema type: :object,
-               properties: {
-                 error: { type: :string }
-               }
+      response "200", "works without authentication" do
+        schema type: :array, items: { type: :object }
         let(:Authorization) { nil }
         let!(:season) { Season.create!(number: 47) }
         let(:season_id) { season.id }
@@ -242,7 +234,6 @@ RSpec.describe "Contestants", type: :request do
       tags "Contestants"
       produces "application/json"
       parameter name: :id, in: :path, type: :string
-      security [ bearerAuth: [] ]
       response "200", "contestant found" do
         schema type: :object,
                properties: {
@@ -287,11 +278,8 @@ RSpec.describe "Contestants", type: :request do
         run_test!
       end
 
-      response "401", "unauthenticated" do
-        schema type: :object,
-               properties: {
-                 error: { type: :string }
-               }
+      response "200", "works without authentication" do
+        schema type: :object
         let(:Authorization) { nil }
         let!(:season) { Season.create!(number: 47) }
         let(:id) { Contestant.create(person: Person.create!(name: "Jane Doe", gender: "Female"), tribename: "Tribal", season: season).id }
