@@ -53,7 +53,9 @@ class ContestantsController < ApplicationController
 
   def update
     contestant = Contestant.find(params[:id])
-    person, person_errors = find_or_create_person(params.dig(:contestant, :name), params.dig(:contestant, :gender))
+    person, person_errors = find_or_update_person(
+      contestant.person, params.dig(:contestant, :name), params.dig(:contestant, :gender)
+    )
     if person.nil?
       render json: { errors: person_errors }, status: :unprocessable_content
       return
@@ -101,5 +103,22 @@ class ContestantsController < ApplicationController
 
     person = Person.new(name: name, gender: gender)
     person.save ? [ person, nil ] : [ nil, person.errors.full_messages ]
+  end
+
+  # Same lookup as find_or_create_person, but for edits: when the name on the
+  # form still matches this contestant's own person, that IS the record being
+  # edited, so gender/name changes must apply to it directly. Otherwise
+  # find_or_create_person's name lookup would just hand back the existing
+  # person unchanged, silently discarding whatever gender the admin picked.
+  # A changed name falls through to find_or_create_person's normal
+  # relink-or-create behavior.
+  def find_or_update_person(current_person, name, gender)
+    return find_or_create_person(name, gender) if name != current_person.name
+
+    if current_person.update(name: name, gender: gender)
+      [ current_person, nil ]
+    else
+      [ nil, current_person.errors.full_messages ]
+    end
   end
 end
