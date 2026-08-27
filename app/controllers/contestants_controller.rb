@@ -81,7 +81,9 @@ class ContestantsController < ApplicationController
   end
 
   def contestant_params
-    params.require(:contestant).permit(:tribename, :season_id, :occupation, :bio, :age, :photo_url, :video_url)
+    params.require(:contestant).permit(
+      :tribename, :season_id, :occupation, :bio, :age, :photo_url, :video_url, :current_city
+    )
   end
 
   # Name is how we identify a real person across seasons: an exact match
