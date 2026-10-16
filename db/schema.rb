@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_27_031817) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_15_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -62,8 +62,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_27_031817) do
     t.datetime "created_at", null: false
     t.bigint "episode_post_id", null: false
     t.string "image_url"
+    t.string "reddit_url"
     t.string "source_url"
     t.datetime "updated_at", null: false
+    t.string "x_url"
     t.index ["episode_post_id"], name: "index_memes_on_episode_post_id"
   end
 
