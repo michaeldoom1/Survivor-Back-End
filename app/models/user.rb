@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :picks, dependent: :destroy
   has_many :poll_votes, dependent: :destroy
   has_many :poll_comments, dependent: :destroy
+  has_many :owned_user_groups, class_name: "UserGroup", foreign_key: :owner_id, dependent: :destroy, inverse_of: :owner
+  has_many :user_group_memberships, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true

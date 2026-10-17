@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_15_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_17_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -148,6 +148,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_000000) do
     t.index ["number"], name: "index_seasons_on_number", unique: true
   end
 
+  create_table "user_group_memberships", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_group_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_group_id", "user_id"], name: "index_user_group_memberships_on_user_group_id_and_user_id", unique: true
+    t.index ["user_group_id"], name: "index_user_group_memberships_on_user_group_id"
+    t.index ["user_id"], name: "index_user_group_memberships_on_user_id"
+  end
+
+  create_table "user_groups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "owner_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_user_groups_on_owner_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
@@ -186,4 +204,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_000000) do
   add_foreign_key "poll_votes", "polls"
   add_foreign_key "poll_votes", "users"
   add_foreign_key "polls", "episode_posts"
+  add_foreign_key "user_group_memberships", "user_groups"
+  add_foreign_key "user_group_memberships", "users"
+  add_foreign_key "user_groups", "users", column: "owner_id"
 end

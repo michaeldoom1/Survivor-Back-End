@@ -38,4 +38,5 @@ Rails.application.routes.draw do
   resources :polls, only: [ :index, :create, :destroy ]
   resources :poll_votes, only: [ :create ]
   resources :poll_comments, only: [ :create ]
+  resources :user_groups, only: [ :index, :create, :update, :destroy ]
 end

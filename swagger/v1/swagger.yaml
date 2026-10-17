@@ -163,11 +163,9 @@ paths:
       summary: Retrieves all contestants
       tags:
       - Contestants
-      security:
-      - bearerAuth: []
       responses:
         '200':
-          description: contestants found
+          description: works without authentication
           content:
             application/json:
               schema:
@@ -205,15 +203,6 @@ paths:
                       type: string
                     updated_at:
                       type: string
-        '401':
-          description: unauthenticated
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
     post:
       summary: Creates a contestant
       tags:
@@ -313,11 +302,9 @@ paths:
         required: true
         schema:
           type: integer
-      security:
-      - bearerAuth: []
       responses:
         '200':
-          description: scores found
+          description: works without authentication
           content:
             application/json:
               schema:
@@ -360,15 +347,6 @@ paths:
                     type: array
                     items:
                       type: string
-        '401':
-          description: unauthenticated
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
   "/contestants/{id}":
     get:
       summary: Retrieves a contestant
@@ -380,11 +358,9 @@ paths:
         required: true
         schema:
           type: string
-      security:
-      - bearerAuth: []
       responses:
         '200':
-          description: contestant found
+          description: works without authentication
           content:
             application/json:
               schema:
@@ -431,15 +407,6 @@ paths:
                     type: array
                     items:
                       type: string
-        '401':
-          description: unauthenticated
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
     put:
       summary: Updates a contestant
       tags:
@@ -540,11 +507,9 @@ paths:
       summary: Retrieves all episode scores
       tags:
       - EpisodeScores
-      security:
-      - bearerAuth: []
       responses:
         '200':
-          description: episode scores found
+          description: works without authentication
           content:
             application/json:
               schema:
@@ -568,15 +533,6 @@ paths:
                       type: string
                     updated_at:
                       type: string
-        '401':
-          description: unauthenticated
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
     post:
       summary: Creates an episode score
       tags:
@@ -661,11 +617,9 @@ paths:
         required: true
         schema:
           type: string
-      security:
-      - bearerAuth: []
       responses:
         '200':
-          description: episode score found
+          description: works without authentication
           content:
             application/json:
               schema:
@@ -899,11 +853,9 @@ paths:
         required: true
         schema:
           type: integer
-      security:
-      - bearerAuth: []
       responses:
         '200':
-          description: picks found
+          description: works without authentication
           content:
             application/json:
               schema:
@@ -913,7 +865,7 @@ paths:
                   properties:
                     user_id:
                       type: integer
-                    email:
+                    user_name:
                       type: string
                     season_id:
                       type: integer
@@ -926,6 +878,8 @@ paths:
                           type: integer
                         name:
                           type: string
+                        points:
+                          type: integer
                     female_contestant:
                       type: object
                       properties:
@@ -933,6 +887,8 @@ paths:
                           type: integer
                         name:
                           type: string
+                        points:
+                          type: integer
                     golden_goose_contestant:
                       type: object
                       properties:
@@ -940,6 +896,10 @@ paths:
                           type: integer
                         name:
                           type: string
+                        points:
+                          type: integer
+                    total_points:
+                      type: integer
         '400':
           description: missing season_id param
           content:
@@ -951,15 +911,6 @@ paths:
                     type: array
                     items:
                       type: string
-        '401':
-          description: unauthenticated
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
   "/picks/{id}":
     get:
       summary: Retrieves a pick
@@ -1103,11 +1054,9 @@ paths:
       summary: Retrieves all scoring events
       tags:
       - ScoringEvents
-      security:
-      - bearerAuth: []
       responses:
         '200':
-          description: scoring events found
+          description: works without authentication
           content:
             application/json:
               schema:
@@ -1125,15 +1074,6 @@ paths:
                       type: string
                     updated_at:
                       type: string
-        '401':
-          description: unauthenticated
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
     post:
       summary: Creates a scoring event
       tags:
@@ -1206,11 +1146,9 @@ paths:
         required: true
         schema:
           type: string
-      security:
-      - bearerAuth: []
       responses:
         '200':
-          description: scoring event found
+          description: works without authentication
           content:
             application/json:
               schema:
@@ -1333,11 +1271,9 @@ paths:
       summary: Retrieves all seasons
       tags:
       - Seasons
-      security:
-      - bearerAuth: []
       responses:
         '200':
-          description: seasons found
+          description: works without authentication
           content:
             application/json:
               schema:
@@ -1353,15 +1289,6 @@ paths:
                       type: string
                     updated_at:
                       type: string
-        '401':
-          description: unauthenticated
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
     post:
       summary: Creates a season
       tags:
@@ -1429,11 +1356,9 @@ paths:
         required: true
         schema:
           type: string
-      security:
-      - bearerAuth: []
       responses:
         '200':
-          description: season found
+          description: works without authentication
           content:
             application/json:
               schema:
@@ -1545,6 +1470,166 @@ paths:
                     type: array
                     items:
                       type: string
+  "/user_groups":
+    get:
+      summary: Lists the groups the current user owns or belongs to
+      tags:
+      - User Groups
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: groups found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    owner_id:
+                      type: integer
+                    owner_name:
+                      type: string
+                    is_owner:
+                      type: boolean
+                    members:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+        '401':
+          description: unauthenticated
+    post:
+      summary: Creates a group owned by the current user
+      tags:
+      - User Groups
+      security:
+      - bearerAuth: []
+      parameters: []
+      responses:
+        '201':
+          description: group created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  owner_id:
+                    type: integer
+                  owner_name:
+                    type: string
+                  is_owner:
+                    type: boolean
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+        '422':
+          description: invalid group
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_group:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    member_ids:
+                      type: array
+                      items:
+                        type: integer
+                  required:
+                  - name
+  "/user_groups/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    patch:
+      summary: Updates a group (owner only)
+      tags:
+      - User Groups
+      security:
+      - bearerAuth: []
+      parameters: []
+      responses:
+        '200':
+          description: group updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  owner_id:
+                    type: integer
+                  owner_name:
+                    type: string
+                  is_owner:
+                    type: boolean
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+        '404':
+          description: not the owner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_group:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    member_ids:
+                      type: array
+                      items:
+                        type: integer
+    delete:
+      summary: Deletes a group (owner only)
+      tags:
+      - User Groups
+      security:
+      - bearerAuth: []
+      responses:
+        '204':
+          description: group deleted
+        '404':
+          description: not the owner
 components:
   securitySchemes:
     bearerAuth:
